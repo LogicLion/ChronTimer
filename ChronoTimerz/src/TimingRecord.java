@@ -1,7 +1,10 @@
-import java.time.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
+
 public class TimingRecord {
-private Instant _start;
-private Instant _finish;
+private LocalDateTime _start;
+private LocalDateTime _finish;
 private Duration _duration;
 private STATUS _status;
 private enum STATUS {
@@ -17,14 +20,14 @@ _status=STATUS.CREATED;
 }
 
 public void start(){
-	_start=Instant.now();
+	_start=LocalDateTime.now();
 	_status=STATUS.STARTED;
 }
 
 public void finish(){
-	_finish=Instant.now();
+	_finish=LocalDateTime.now();
 	_status=STATUS.FINISHED;
-	_duration=Duration.between(_start,_finish);
+	_duration=Duration.between(_start, _finish);
 }
 
 public void DNF(){
@@ -35,11 +38,11 @@ public void cancel(){
 	_status=STATUS.CANCELLED;
 }
 
-public Instant get_start() {
+public LocalDateTime get_start() {
 	return _start;
 }
 
-public Instant get_finish() {
+public LocalDateTime get_finish() {
 	return _finish;
 }
 
@@ -49,6 +52,24 @@ public Duration get_duration() {
 
 public STATUS get_status() {
 	return _status;
+}
+
+public String toString()
+{
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm:ss.SS");
+	if(_status==STATUS.CREATED) return "***CREATED***";
+	else if(_status==STATUS.CANCELLED) return "***CANCELLED***";
+	else if(_status==STATUS.STARTED) {
+		return "***STARTED***	 Start: " + _start.format(formatter);
+	}
+	else if(_status==STATUS.DNF) {
+		return "***DNF***		Start: " + _start.format(formatter);
+	}
+	else{
+		return "***FINISHED***		Start: " + _start.format(formatter) + "	Finish: " + _finish.format(formatter) + 
+				"	Duration: " + _duration.getSeconds() + "." +_duration.getNano();
+	}
+	
 }
 
 }
