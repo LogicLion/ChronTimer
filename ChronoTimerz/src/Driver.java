@@ -1,15 +1,17 @@
 
 public class Driver {
 public static void main(String[] args){
-	TimingRecord test = new TimingRecord();
-	test.start();
+	IndividualStream test = new IndividualStream(10);
+	for(int i = 0; i<10; ++i)
+	{
+	test.startRecord();
 	try{
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 	}
 	catch(InterruptedException ex){
 		Thread.currentThread().interrupt();
 	}
-	test.finish();
-	System.out.println(test.toString());
+	test.finishRecord();
+	}
 }
 }
