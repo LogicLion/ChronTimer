@@ -1,0 +1,31 @@
+/**
+ // Created by thomas on 2/23/15.
+ */
+import java.lang.Object;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Queue;
+
+public class CommandReader {
+
+    private Queue<Command> listOfCommands;
+    private Command _current;
+    private ChronoTimer _timer;
+    
+    CommandReader(){
+    	_timer = new ChronoTimer();
+    }
+
+    public Command parse(String input){
+        if (input.isEmpty()) return  null;
+        
+        if(input.equals("ON")) _timer.turnOn();
+        
+		return null;
+
+    }
+
+
+
+
+}

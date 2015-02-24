@@ -1,0 +1,21 @@
+/**
+ * Created by thomas on 2/23/15.
+ */
+import java.lang.Object;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+public class CommandReader {
+
+    private ArrayList<Command> listOfCommands;
+
+
+    private Command parse(String input){
+        if (input.isEmpty()) return  NULL;
+
+    }
+
+
+
+
+}

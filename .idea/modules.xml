@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ChronoTimer361.iml" filepath="$PROJECT_DIR$/ChronoTimer361.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChronoTimerz/ChronoTimerz.iml" filepath="$PROJECT_DIR$/ChronoTimerz/ChronoTimerz.iml" />
     </modules>
   </component>
 </project>
