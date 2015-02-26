@@ -1,0 +1,39 @@
+import java.time.LocalDateTime;
+
+enum SensorType{
+	PUSH, EYE, GATE, PAD
+}
+
+
+public class Sensor {
+	
+	SensorType type;
+	String typeOfSensor;
+	private boolean isArmed;
+	
+	public Sensor(SensorType t){
+		type = t;
+		if(t == SensorType.PUSH) typeOfSensor = "PUSH";
+		if(t == SensorType.EYE) typeOfSensor = "EYE";
+		if(t == SensorType.GATE) typeOfSensor = "GATE";
+		if(t == SensorType.PAD) typeOfSensor = "PAD";
+	}
+	
+	public void disarm(){
+		System.out.println("Disarmed!");
+	}
+	
+	public void arm(){
+		System.out.println("Armed");
+		isArmed = true;
+	}
+	
+	public LocalDateTime trigger(){
+		System.out.println("TRIGGERED!");
+		return isArmed ? LocalDateTime.now() : null;
+	}
+	
+	public String toString(){
+			return "I AM A " + this.typeOfSensor + " SENSOR";
+	}
+}

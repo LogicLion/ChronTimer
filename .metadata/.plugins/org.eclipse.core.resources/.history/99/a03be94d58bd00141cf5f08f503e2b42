@@ -1,0 +1,24 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
+
+public class Channel {
+	
+	private boolean isArmed;
+	
+	public void disarm(){
+		System.out.print("DISARMED");
+		isArmed = false;
+	}
+	
+	public void arm(){
+		System.out.println("Armed");
+		isArmed = true;
+	}
+	
+	public LocalDateTime trigger(){
+		System.out.println("TRIGGERED!");
+		return isArmed ? LocalDateTime.now() : null;
+	}
+	
+}

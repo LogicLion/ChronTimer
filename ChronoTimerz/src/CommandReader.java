@@ -13,14 +13,17 @@ public class CommandReader {
     private ChronoTimer _timer;
     
     CommandReader(){
+    	//Why not make ChronoTimer a singleton object? For example: _timer = ChronoTimer.Instance();
     	_timer = new ChronoTimer();
     }
 
     public String parse(String input){
         if (input.isEmpty()) return  null;
-       
+       //Why not use equalsIgnoreCase()?
         if(input.equals("ON")) _timer.turnOn();
         else if(input.equals("OFF")) _timer.turnOff();
+        else if(input.equals("START")) _timer.start();
+        else if(input.equals("FIN")) _timer.end();
         else if(input.equals("EXIT")) return null;
 
         else{

@@ -1,0 +1,8 @@
+
+public class Channel {
+	
+	public void disarm(){
+		System.out.print("DISARMED");
+	}
+	
+}

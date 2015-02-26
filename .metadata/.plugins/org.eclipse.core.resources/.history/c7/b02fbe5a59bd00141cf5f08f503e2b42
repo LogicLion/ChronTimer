@@ -1,0 +1,26 @@
+enum SensorType{
+	PUSH, EYE, GATE, PAD
+}
+
+
+public class Sensor {
+	
+	SensorType type;
+	String typeOfSensor;
+	
+	public Sensor(SensorType t){
+		type = t;
+		if(t == SensorType.PUSH) typeOfSensor = "PUSH";
+		if(t == SensorType.EYE) typeOfSensor = "EYE";
+		if(t == SensorType.GATE) typeOfSensor = "GATE";
+		if(t == SensorType.PAD) typeOfSensor = "PAD";
+	}
+	
+	public void disarm(){
+		System.out.println("Disarmed!");
+	}
+	
+	public String toString(){
+			return "I AM A " + this.typeOfSensor + " SENSOR";
+	}
+}

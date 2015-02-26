@@ -7,6 +7,7 @@ private LocalDateTime _start;
 private LocalDateTime _finish;
 private Duration _duration;
 private STATUS _eventCode;
+
 private enum STATUS {
 	 START, DNF, FINISH, CANCEL
 }
@@ -18,15 +19,23 @@ _finish=null;
 _duration=null;
 }
 
-public void start(){
-	_start=LocalDateTime.now();
+public void start(LocalDateTime startTime){
+	//_start=LocalDateTime.now();
+	_start = startTime;
 	_eventCode=STATUS.START;
 }
 
-public void finish(){
-	_finish=LocalDateTime.now();
+public void finish(LocalDateTime finishTime){
+	//_finish=LocalDateTime.now();
+	_finish = finishTime;
 	_eventCode=STATUS.FINISH;
 	_duration=Duration.between(_start, _finish);
+}
+
+public boolean isReady(){
+	if(_start == null &&_finish == null) return true;
+	//if(_start != null && _finish != null) return true;
+	return false;
 }
 
 public void DNF(){
