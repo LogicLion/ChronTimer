@@ -115,19 +115,9 @@ public void turnChannelOn(int channelNum){
 
 public void turnChannelOff(int channelNum){
 	if(channelNum == 1){
-		if(channelOne.hasSensor()){
-			this.channelOne.disarm();
-		}else{
-			this.channelOne.setSensor("PUSH", 1);
-			this.channelOne.disarm();
-		}
+		channelOne.disarm();
 	}else if(channelNum == 2){
-		if(channelTwo == null){
-			this.channelTwo.disarm();
-		}else{
-			this.channelTwo.setSensor("PUSH", 2);
-			this.channelTwo.disarm();
-		}
+		channelTwo.disarm();
 	}else{
 		System.out.println("Sorry cannot turn off that channel: " + channelNum);
 	}
@@ -146,11 +136,7 @@ public void toggle(int channelNum){
 public void connect(String sensorType, String channel){
 	
 	if(channel.equals("1")){
-		channelOne.setSensor(sensorType, 1);
-	}else if(channel.equals("2")){
-		channelTwo.setSensor(sensorType, 2);
-	}else{
-		System.out.println("Cannot set to that channel.");
+		channelOne.setSensor(sensorType);
 	}
 }
 

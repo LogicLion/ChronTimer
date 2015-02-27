@@ -13,10 +13,6 @@ public class ChronoTimer {
 		this.stream = new IndividualStream();
 	}
 
-	public void connect(String sensorType, String channel){
-		this.stream.connect(sensorType, channel);
-	}
-	
 	public void start(){
 		this.stream.startRecord();
 	}

@@ -10,7 +10,7 @@ public class Channel {
 	private Sensor s;
 	
 	public Channel(){
-		//this.setSensor("PUSH", 0);
+		this.setSensor("PUSH", 0);
 	}
 	
 	public void arm(){
@@ -34,8 +34,5 @@ public class Channel {
 		s.toggle();
 	}
 
-	public boolean hasSensor(){
-		return s != null;
-	}
 	
 }

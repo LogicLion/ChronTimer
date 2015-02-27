@@ -34,8 +34,5 @@ public class Channel {
 		s.toggle();
 	}
 
-	public boolean hasSensor(){
-		return s != null;
-	}
 	
 }

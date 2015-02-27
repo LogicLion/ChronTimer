@@ -28,7 +28,7 @@ public class Sensor {
 	}
 	
 	public String toString(){
-			return "I AM A " + this.typeOfSensor + " SENSOR on CHANNEL: " + this.channelNum;
+			return "I AM A " + this.typeOfSensor + " SENSOR";
 	}
 	
 	public void toggle(){
@@ -38,9 +38,7 @@ public class Sensor {
 		}
 	}
 	
-	public int getChannelNum(){
+	public getChannelNum(){
 		return this.channelNum;
 	}
-	
-	
 }

@@ -115,17 +115,17 @@ public void turnChannelOn(int channelNum){
 
 public void turnChannelOff(int channelNum){
 	if(channelNum == 1){
-		if(channelOne.hasSensor()){
+		if(channelOne == null){
+			this.channelOne.setSensor("PUSH", 1);
 			this.channelOne.disarm();
 		}else{
-			this.channelOne.setSensor("PUSH", 1);
 			this.channelOne.disarm();
 		}
 	}else if(channelNum == 2){
 		if(channelTwo == null){
+			this.channelTwo.setSensor("PUSH", 2);
 			this.channelTwo.disarm();
 		}else{
-			this.channelTwo.setSensor("PUSH", 2);
 			this.channelTwo.disarm();
 		}
 	}else{

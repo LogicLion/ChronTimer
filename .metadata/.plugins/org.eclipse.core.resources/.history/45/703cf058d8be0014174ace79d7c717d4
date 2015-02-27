@@ -41,6 +41,4 @@ public class Sensor {
 	public int getChannelNum(){
 		return this.channelNum;
 	}
-	
-	
 }

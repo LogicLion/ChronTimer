@@ -4,13 +4,12 @@ import java.time.LocalDateTime;
 
 public class Sensor {
 	
+	SensorType type;
 	String typeOfSensor;
 	private boolean isArmed;
-	private int channelNum;
 	
-	public Sensor(String sensorType, int channelNum){
-		this.typeOfSensor = sensorType;
-		this.channelNum = channelNum;
+	public Sensor(String sensorType){
+		typeOfSensor = sensorType;
 	}
 	
 	public void disarm(){
@@ -28,7 +27,7 @@ public class Sensor {
 	}
 	
 	public String toString(){
-			return "I AM A " + this.typeOfSensor + " SENSOR on CHANNEL: " + this.channelNum;
+			return "I AM A " + this.typeOfSensor + " SENSOR";
 	}
 	
 	public void toggle(){
@@ -37,10 +36,4 @@ public class Sensor {
 			this.arm();
 		}
 	}
-	
-	public int getChannelNum(){
-		return this.channelNum;
-	}
-	
-	
 }
