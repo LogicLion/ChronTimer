@@ -38,11 +38,8 @@ public class ChronoTimer {
 	public void turnOn(){
 		System.out.println("ON");	
 		this.stream.turnChannelOff(1);
-		this.stream.turnChannelOff(2);	
-	}
-	
-	public void toggle(String channel){
-		this.stream.toggle(Integer.parseInt(channel));
+		this.stream.turnChannelOff(2);
+		
 	}
 	
 }
