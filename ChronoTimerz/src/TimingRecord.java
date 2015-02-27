@@ -7,16 +7,17 @@ private LocalDateTime _start;
 private LocalDateTime _finish;
 private Duration _duration;
 private STATUS _eventCode;
+private String runNumber;
 
 private enum STATUS {
 	 START, DNF, FINISH, CANCEL
 }
 
-public TimingRecord()
-{
-_start=null;
-_finish=null;
-_duration=null;
+public TimingRecord(String runNumber){
+	this.runNumber = runNumber;
+	_start=null;
+	_finish=null;
+	_duration=null;
 }
 
 public void start(LocalDateTime startTime){
@@ -67,13 +68,13 @@ public String toString()
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm:ss.SS");
 	if(_eventCode==STATUS.CANCEL) return "***CANCEL***";
 	else if(_eventCode==STATUS.START) {
-		return "***START***	 Start: " + _start.format(formatter);
+		return "***START***	 "+runNumber+" Start: " + _start.format(formatter);
 	}
 	else if(_eventCode==STATUS.DNF) {
-		return "***DNF***		Start: " + _start.format(formatter);
+		return "***DNF***	"+runNumber+"	Start: " + _start.format(formatter);
 	}
 	else{
-		return "***FINISH***	Start: " + _start.format(formatter) + "	Finish: " + _finish.format(formatter) + 
+		return "***FINISH*** "+runNumber+"	Start: " + _start.format(formatter) + "	Finish: " + _finish.format(formatter) + 
 				"	Duration: " + _duration.getSeconds() + "." +_duration.getNano();
 	}
 	

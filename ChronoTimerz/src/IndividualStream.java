@@ -4,9 +4,7 @@ import java.time.Duration;
 import java.util.LinkedList;
 import java.util.Queue;
 
-enum compType{
-	IND, PARIND, GRP, PARGRP
-}
+
 
 public class IndividualStream {
 
@@ -20,28 +18,32 @@ private int _capacity;
 private int runNumber;
 private compType competition;
 private Queue<TimingRecord> runs;
+private Queue<TimingRecord> pendingRuns;
+boolean channelOneOn = false;
+boolean channelTwoOn = false;
 
 //commented out fields, set runs aka (timing records) to only one 1 so far.
 public IndividualStream()	
 {
 	channelOne = new Channel();
 	channelTwo = new Channel();
-	channelOne.disarm();
-	channelTwo.disarm();
+	
+	//channelOne.disarm();
+	//channelTwo.disarm();
 	this.competition = compType.IND;
 	this.runNumber = 1;
 	runs = new LinkedList<TimingRecord>();
+	pendingRuns = new LinkedList<TimingRecord>();
 	
-	_start = LocalDateTime.now();
+	//_start = LocalDateTime.now();
 	
 	/*_stream=new TimingRecord[numRunners];
 	for(int i=0; i<numRunners; ++i){
 		_stream[i] = new TimingRecord();
 	}*/
-	runs.add(new TimingRecord());
 	_currentRecord=0;
 	//_capacity=numRunners;
-	_capacity = runs.size();
+	//_capacity = 0;
 }
 
 public void CancelRecord(){
@@ -53,13 +55,24 @@ public void CancelRecord(){
 	System.out.println("Next Racer");
 }
 
+public void num(String runNumber){
+	//runs.add(new TimingRecord(runNumber));
+	pendingRuns.add(new TimingRecord(runNumber));
+	System.out.println(runNumber);
+}
+
 public void startRecord()
 {
 	//_stream[_currentRecord].start();
 	//System.out.println(_stream[_currentRecord].toString());
 	channelOne.arm();
-	runs.peek().start(channelOne.trigger());
-	System.out.println(runs.peek().toString());
+	//runs.add(new TimingRecord());
+	TimingRecord current = pendingRuns.poll();
+	current.start(channelOne.trigger());
+	runs.add(current);
+	System.out.println(current.toString());
+	//System.out.println("SIZE: " + runs.size());
+
 }
 
 public void finishRecord(){
@@ -68,8 +81,10 @@ public void finishRecord(){
 	channelTwo.arm();
 	runs.peek().finish(channelTwo.trigger());
 	System.out.println(runs.poll().toString());
-	_currentRecord++;
+	//_currentRecord++;
 	System.out.println("Next Racer");
+	//System.out.println("SIZE: " + runs.size());
+
 	
 }
 
@@ -87,5 +102,35 @@ public TimingRecord[] get_stream(){
 	return _stream;
 }*/
 
+
+public void turnChannelOn(int channelNum){
+	if(channelNum == 1){
+		channelOne.arm();
+	}else if(channelNum == 2){
+		channelTwo.arm();
+	}else{
+		System.out.println("Sorry cannot turn on that channel: " + channelNum);
+	}
+}
+
+public void turnChannelOff(int channelNum){
+	if(channelNum == 1){
+		channelOne.disarm();
+	}else if(channelNum == 2){
+		channelTwo.disarm();
+	}else{
+		System.out.println("Sorry cannot turn off that channel: " + channelNum);
+	}
+}
+
+public void toggle(int channelNum){
+	if(channelNum == 1){
+		channelOne.toggle();
+	}else if(channelNum == 2){
+		channelTwo.toggle();
+	}else{
+		System.out.println("Sorry cannot turn off that channel: " + channelNum);
+	}
+}
 
 }

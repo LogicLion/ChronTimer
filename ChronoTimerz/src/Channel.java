@@ -31,6 +31,9 @@ public class Channel {
 		s = new Sensor(t);
 	}
 	
+	public void toggle(){
+		s.toggle();
+	}
 
 	
 }

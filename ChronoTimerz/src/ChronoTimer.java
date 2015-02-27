@@ -21,12 +21,21 @@ public class ChronoTimer {
 		this.stream.finishRecord();
 	}
 	
+	public void num(String runNumber){
+		this.stream.num(runNumber);
+	}
+	
 	public void turnOff(){
 		System.out.println("OFF");
+		this.stream.turnChannelOff(1);
+		this.stream.turnChannelOff(2);
 	}
 	
 	public void turnOn(){
 		System.out.println("ON");	
+		this.stream.turnChannelOff(1);
+		this.stream.turnChannelOff(2);
+		
 	}
 	
 }

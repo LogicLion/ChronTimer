@@ -11,6 +11,7 @@ public class CommandReader {
     private Queue<Command> listOfCommands;
     private Command _current;
     private ChronoTimer _timer;
+    private String[] splitCommand;
     
     CommandReader(){
     	//Why not make ChronoTimer a singleton object? For example: _timer = ChronoTimer.Instance();
@@ -19,13 +20,15 @@ public class CommandReader {
 
     public String parse(String input){
         if (input.isEmpty()) return  null;
+        splitCommand = input.split(" ");
        //Why not use equalsIgnoreCase()?
         if(input.equals("ON")) _timer.turnOn();
         else if(input.equals("OFF")) _timer.turnOff();
+        else if(splitCommand[0].equals("NUM")) _timer.num(splitCommand[1]);
         else if(input.equals("START")) _timer.start();
         else if(input.equals("FIN")) _timer.end();
         else if(input.equals("EXIT")) return null;
-
+        
         else{
         	System.out.println("NOT A VALID INPUT");
         }

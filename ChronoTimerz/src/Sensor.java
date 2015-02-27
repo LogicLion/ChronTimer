@@ -33,4 +33,11 @@ public class Sensor {
 	public String toString(){
 			return "I AM A " + this.typeOfSensor + " SENSOR";
 	}
+	
+	public void toggle(){
+		if(isArmed) this.disarm();
+		else{
+			this.arm();
+		}
+	}
 }
