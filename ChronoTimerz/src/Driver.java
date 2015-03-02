@@ -1,3 +1,6 @@
+import java.time.Clock;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 
@@ -8,6 +11,8 @@ public static void main(String[] args){
 	
 	CommandReader r = new CommandReader();
 	Scanner input = new Scanner(System.in);
+	Clock systemClock = Clock.systemUTC();
+	Clock clock = Clock.offset(systemClock, Duration.between(LocalDateTime.now(), endExclusive));
 	while(r.parse(input.nextLine()) != null);
 	
 	/*
