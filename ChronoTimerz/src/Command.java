@@ -41,45 +41,50 @@ public class Command
 	  String line = null;
 	  while ((line = br.readLine()) != null) 
 	   {
-	  		String timeStamp;
-	  		String cmdName;
-	  		Arraylist<String> args;
-
-
-		    StringTokenizer multiTokenizer = new StringTokenizer(line);
-
-		    int index = 0;
-
-		    while (multiTokenizer.hasMoreTokens())
-		    {
-		      System.out.println(multiTokenizer.nextToken());
-		      // USE TOKENS APPROPRIATELY
-		      swich (index)
-		      {
-		        // TIMESTAMP
-		        case 0:
-		        	timeStamp = multiTokenizer.nextToken();
-		        break;
-
-		        // CMD NAME
-		        case 1:
-					cmdName = multiTokenizer.nextToken();
-		        break;
-
-		        // CMD ARG
-		        default:
-		        	args.add(multiTokenizer.nextToken());
-		        break;
-		      }
-		      ++ index;
-		    }
-
-		    commandList.add(new Command(timeStamp, cmdName, args));
+		    commandList.add(Command.commandFromString(line));
 		}
 		 
 		br.close();
 
 		return commandList;
+    }
+
+    public static Command commandFromString(String str)
+    {
+		String timeStamp;
+  		String cmdName;
+  		Arraylist<String> args;
+
+
+	    StringTokenizer multiTokenizer = new StringTokenizer(line);
+
+	    int index = 0;
+
+	    while (multiTokenizer.hasMoreTokens())
+	    {
+	      System.out.println(multiTokenizer.nextToken());
+	      // USE TOKENS APPROPRIATELY
+	      swich (index)
+	      {
+	        // TIMESTAMP
+	        case 0:
+	        	timeStamp = multiTokenizer.nextToken();
+	        break;
+
+	        // CMD NAME
+	        case 1:
+				cmdName = multiTokenizer.nextToken();
+	        break;
+
+	        // CMD ARG
+	        default:
+	        	args.add(multiTokenizer.nextToken());
+	        break;
+	      }
+	      ++ index;
+	    }
+
+		return    commandList.add(new Command(timeStamp, cmdName, args));
     }
 
     public void execute()
