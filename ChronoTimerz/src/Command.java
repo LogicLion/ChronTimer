@@ -81,6 +81,44 @@ public class Command
 
 		return commandList;
     }
+
+    public void execute()
+    {
+    	if (this.cmdName.isEquals('ON'))
+    	{
+
+    	}
+    	else if (this.cmdName.isEquals('OFF'))
+    	{
+    		
+    	}
+    	else if (this.cmdName.isEquals('NUM'))
+    	{
+    		
+    	}    	
+    	else if (this.cmdName.isEquals('COMM'))
+    	{
+    		
+    	}
+    	else if (this.cmdName.isEquals('TOGGLE'))
+    	{
+    		
+    	}
+    	else if (this.cmdName.isEquals('START'))
+    	{
+    		
+    	}
+    	else if (this.cmdName.isEquals('FIN'))
+    	{
+    		
+    	}
+    	else if (this.cmdName.isEquals('EXIT'))
+    	{
+    		
+    	}
+    	else
+    		throw Exception("Invalid command name");
+    }
 }
 
 
