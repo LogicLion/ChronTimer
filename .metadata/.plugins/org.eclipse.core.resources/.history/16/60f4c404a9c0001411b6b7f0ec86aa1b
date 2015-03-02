@@ -27,7 +27,7 @@ public class Command
     	try
     	{
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-		    java.util.Date parsedDate = dateFormat.parse(timeStamp);
+		    Date parsedDate = dateFormat.parse(timeStamp);
 		    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
 		}
 		catch(Exception e)
@@ -39,40 +39,6 @@ public class Command
 		this.args = args;
     }
 
-
-    public static Command commandFromString(String str)
-    {
-		String timeStamp = null;
-  		String cmdName = null;
-  		ArrayList<String> args = new ArrayList<String>();
-
-
-	    StringTokenizer multiTokenizer = new StringTokenizer(str);
-
-	    int index = 0;
-
-	    while (multiTokenizer.hasMoreTokens())
-	    {
-	      //System.out.println(multiTokenizer.nextToken());
-	      // USE TOKENS APPROPRIATELY
-	      switch (index)
-	      {
-	        case 0:
-	        	cmdName = multiTokenizer.nextToken();
-	        break;
-
-
-	        // CMD ARG
-	        default:
-	        	args.add(multiTokenizer.nextToken());
-	        break;
-	      }
-	      ++ index;
-	    }
-
-		return    new Command(timeStamp, cmdName, args);
-    }
-    
     public static ArrayList<Command> parseCommandFile(File fin) throws IOException 
     {
     	ArrayList<Command> commandList = new ArrayList<Command>();
