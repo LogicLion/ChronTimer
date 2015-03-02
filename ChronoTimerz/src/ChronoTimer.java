@@ -1,48 +1,86 @@
-enum compType{
-	IND, PARIND, GRP, PARGRP
-}
+import java.time.LocalDateTime;
 
 public class ChronoTimer {
 	
-	IndividualStream stream;
-	//int runNumber;
-	Channel channels[];
-	//compType competition;
+	IStream _stream;
+	Channel _channels[];
+	boolean _isOn;
 	
 	ChronoTimer(){
-		this.stream = new IndividualStream();
-	}
-
-	public void connect(String sensorType, String channel){
-		this.stream.connect(sensorType, channel);
-	}
-	
-	public void start(){
-		this.stream.startRecord();
-	}
-	
-	public void end(){
-		this.stream.finishRecord();
-	}
-	
-	public void num(String runNumber){
-		this.stream.num(runNumber);
-	}
-	
-	public void turnOff(){
-		System.out.println("OFF");
-		this.stream.turnChannelOff(1);
-		this.stream.turnChannelOff(2);
+		_stream = new IndividualStream();
+		_channels = new Channel[2];
+		_channels[0] = new Channel();
+		_channels[1] = new Channel();
 	}
 	
 	public void turnOn(){
-		System.out.println("ON");	
-		this.stream.turnChannelOff(1);
-		this.stream.turnChannelOff(2);	
+		_isOn=true;
 	}
 	
-	public void toggle(String channel){
-		this.stream.toggle(Integer.parseInt(channel));
+	public void turnOff(){
+		_isOn=false;
 	}
+	
+
+	public void connect(String sensorType, int channel){
+		if(_isOn)
+		{
+		_channels[channel-1].connect(sensorType);
+		}
+	}
+	public void toggle(int channel){
+		if(_isOn)
+		{
+		_channels[channel-1].toggle();
+		}
+	}
+	
+	public void start(){
+		if(_isOn)
+		{
+			_stream.startRecord(_channels[0].trigger());
+		}
+	}
+	
+	public void end(){
+		if(_isOn)
+		{
+			_stream.finishRecord(_channels[1].trigger());	
+		}
+		
+	}
+	
+	public void num(int runNumber)
+	{
+		if(_isOn)
+		{
+			_stream.num(runNumber);
+		}
+	}
+	
+	public void print(){
+		if(_isOn)
+		{
+			System.out.println(_stream.toString());
+		}
+	}
+
+	public void DNF() {
+		if(_isOn)
+		{
+			_stream.DNFRecord();
+		}
+	}
+
+	public void cancel() {
+		if(_isOn)
+		{
+			_stream.DNFRecord();
+		}
+	}
+	
+
+	
+
 	
 }

@@ -2,40 +2,69 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 
-
-
-
 public class Channel {
 	
-	private Sensor s;
+	private ISensor s;
+	private boolean hasSensor;
+	private boolean isArmed;
 	
-	public Channel(){
-		//this.setSensor("PUSH", 0);
+	public Channel()
+	{
+		isArmed =false;
+		hasSensor = false;
+		s = null;
 	}
 	
-	public void arm(){
-		s.arm();
+	public void connect(String sensorType)
+	{
+		if(sensorType.equalsIgnoreCase("gate"))
+		{
+			s = new Gate();
+			hasSensor=true;
+		}
+		else if(sensorType.equalsIgnoreCase("eye")){
+			s = new Eye();
+			hasSensor=true;
+		}
+		else if(sensorType.equalsIgnoreCase("pad")){
+			s = new Pad();
+			hasSensor=true;
+		}
+		else
+		{
+			throw new UnsupportedOperationException("Sensor Type Not Recognized");
+		}
 	}
 	
-	public LocalDateTime trigger(){
-		return s.trigger();
+	public void disconnect(String sensorType)
+	{
+		if(hasSensor)
+		{
+			s=null;
+			hasSensor=false;
+		}
+		else throw new UnsupportedOperationException("Cannot disconnect when nothing is connected");
 	}
 	
-	public void disarm(){
-		s.disarm();
+	public void toggle()
+	{
+		if(isArmed && hasSensor) isArmed=false;
+		else if(!isArmed && hasSensor) isArmed=true;
+		else throw new UnsupportedOperationException("Must connect a sensor before arming");
 	}
 	
-	public void setSensor(String sensorType, int channelNum){
-		s = new Sensor(sensorType, channelNum);
-		System.out.println(s.toString());
+	public LocalDateTime trigger()
+	{
+		if(isArmed && hasSensor)
+		{
+			return s.trigger();
+		}
+		else
+		{
+			throw new UnsupportedOperationException("Channel is not armed");
+		}
 	}
 	
-	public void toggle(){
-		s.toggle();
-	}
 
-	public boolean hasSensor(){
-		return s != null;
-	}
 	
 }

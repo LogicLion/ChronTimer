@@ -7,14 +7,14 @@ private LocalDateTime _start;
 private LocalDateTime _finish;
 private Duration _duration;
 private STATUS _eventCode;
-private String runNumber;
+private int _BIB;
 
 private enum STATUS {
 	 START, DNF, FINISH, CANCEL
 }
 
-public TimingRecord(String runNumber){
-	this.runNumber = runNumber;
+public TimingRecord(int BIB){
+	_BIB = BIB;
 	_start=null;
 	_finish=null;
 	_duration=null;
@@ -34,9 +34,7 @@ public void finish(LocalDateTime finishTime){
 }
 
 public boolean isReady(){
-	if(_start == null &&_finish == null) return true;
-	//if(_start != null && _finish != null) return true;
-	return false;
+	return (_start == null &&_finish == null);
 }
 
 public void DNF(){
@@ -65,17 +63,15 @@ public STATUS get_eventCode() {
 
 public String toString()
 {
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLL yyyy HH:mm:ss.SS");
-	if(_eventCode==STATUS.CANCEL) return "***CANCEL***";
+	if(_eventCode==STATUS.CANCEL) return _BIB + "\tCANCEL";
 	else if(_eventCode==STATUS.START) {
-		return "***START***	 "+runNumber+" Start: " + _start.format(formatter);
+		return _BIB+ "\tSTART";
 	}
 	else if(_eventCode==STATUS.DNF) {
-		return "***DNF***	"+runNumber+"	Start: " + _start.format(formatter);
+		return _BIB+"\tDNF";
 	}
 	else{
-		return "***FINISH*** "+runNumber+"	Start: " + _start.format(formatter) + "	Finish: " + _finish.format(formatter) + 
-				"	Duration: " + _duration.getSeconds() + "." +_duration.getNano();
+		return _BIB+ "\t" + _duration.getSeconds() + "." +_duration.getNano();
 	}
 	
 }

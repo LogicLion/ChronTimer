@@ -8,28 +8,28 @@ import java.util.Queue;
 
 public class CommandReader {
 
-    private Queue<Command> listOfCommands;
-    private Command _current;
     private ChronoTimer _timer;
     private String[] splitCommand;
     
-    CommandReader(){
-    	//Why not make ChronoTimer a singleton object? For example: _timer = ChronoTimer.Instance();
+    CommandReader()
+    {
     	_timer = new ChronoTimer();
     }
 
     public String parse(String input){
         if (input.isEmpty()) return  null;
         splitCommand = input.split(" ");
-       //Why not use equalsIgnoreCase()?
-        if(input.equals("ON")) _timer.turnOn();
-        else if(input.equals("OFF")) _timer.turnOff();
-        else if(splitCommand[0].equals("NUM")) _timer.num(splitCommand[1]);
-        else if(splitCommand[0].equals("CONN")) _timer.connect(splitCommand[1], splitCommand[2]);
-        else if(splitCommand[0].equals("TOGGLE")) _timer.toggle(splitCommand[1]);
-        else if(input.equals("START")) _timer.start();
-        else if(input.equals("FIN")) _timer.end();
-        else if(input.equals("EXIT")) return null;
+        if(input.equalsIgnoreCase("ON")) _timer.turnOn();
+        else if(input.equalsIgnoreCase("OFF")) _timer.turnOff();
+        else if(splitCommand[0].equalsIgnoreCase("NUM")) _timer.num(Integer.parseInt(splitCommand[1]));
+        else if(splitCommand[0].equalsIgnoreCase("CONN")) _timer.connect(splitCommand[1], Integer.parseInt(splitCommand[2]));
+        else if(splitCommand[0].equalsIgnoreCase("TOGGLE")) _timer.toggle(Integer.parseInt(splitCommand[1]));
+        else if(input.equalsIgnoreCase("START")) _timer.start();
+        else if(input.equalsIgnoreCase("FIN")) _timer.end();
+        else if(input.equalsIgnoreCase("DNF")) _timer.DNF();
+        else if(input.equalsIgnoreCase("CANCEL")) _timer.cancel();
+        else if(input.equalsIgnoreCase("PRINT")) _timer.print();
+        else if(input.equalsIgnoreCase("EXIT")) return null;
         
         else{
         	System.out.println("NOT A VALID INPUT");
